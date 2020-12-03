@@ -1,0 +1,21 @@
+{
+  "name": "advent2020",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc --watch",
+    "day:01:a": "node build/day/01/a",
+    "day:01:b": "node build/day/01/b",
+    "day:02:a": "node build/day/02/a",
+    "day:02:b": "node build/day/02/b",
+    "day:03:a": "node build/day/03/a",
+    "day:03:b": "node build/day/03/b",
+    "clean": "rm -rf build"
+  },
+  "author": "stevenjblack@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.1.2"
+  }
+}
