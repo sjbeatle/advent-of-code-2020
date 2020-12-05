@@ -1,27 +1,25 @@
 import { boardingPasses } from './input';
 
-const rows = 128;
-const cols = 8;
 const seats: Seat[] = [];
 
-boardingPasses.forEach(p => {
-  const rowMap = p.slice(0, 7).split('');
-  const colMap = p.slice(7).split('');
+boardingPasses.forEach(pass => {
+  const rowMap = pass.slice(0, 7).split('');
+  const colMap = pass.slice(7).split('');
 
-  let row = [0, rows];
-  rowMap.forEach(step => {
-    row = half(row, step);
+  let rowRange = [0, 128];
+  rowMap.forEach(direction => {
+    rowRange = halve(rowRange, direction);
   });
 
-  let col = [0, cols];
-  colMap.forEach(step => {
-    col = half(col, step);
+  let colRange = [0, 8];
+  colMap.forEach(direction => {
+    colRange = halve(colRange, direction);
   });
 
   seats.push({
-    row: row[0],
-    col: col[0],
-    id: row[0] * 8 + col[0],
+    row: rowRange[0],
+    col: colRange[0],
+    id: rowRange[0] * 8 + colRange[0],
   });
 });
 
@@ -31,7 +29,11 @@ const mySeat = findMissingNumber(
     sort((a, b) => a > b ? 1 : -1),
 );
 
+/**
+ * Answer
+ */
 console.log(`My seat ID is ${mySeat}`);
+
 
 /**
  * Helper Functions
@@ -91,16 +93,17 @@ function findMissingNumber(arr: number[]): number {
   // return sort[mid] + 1;
 }
 
-
-function half(range: number[], half: string): number[] {
-  const isUpper = ['F', 'L'].includes(half);
+function halve(range: number[], direction: string): number[] {
+  const isUpper = ['F', 'L'].includes(direction);
   const [min, max] = range;
-  const midPoint = (max - min) / 2;
+  // TODO: Make more robust
+  const midPoint = (max - min) / 2; // won't work if (max-min) were an odd value
 
   return isUpper
     ? [min, max - midPoint]
     : [min + midPoint, max];
 }
+
 
 /**
  * Interfaces
