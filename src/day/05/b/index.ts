@@ -32,13 +32,13 @@ const mySeat = findMissingNumber(
 /**
  * Answer
  */
-console.log(`My seat ID is ${mySeat}`);
+console.log(`The missing seat ID is ${mySeat}`);
 
 
 /**
  * Helper Functions
  */
-
+// function expects sorted array as input
 function findMissingNumber(arr: number[]): number {
   // only two items? the missing number is between them
   if (arr.length === 2) {
@@ -71,26 +71,6 @@ function findMissingNumber(arr: number[]): number {
   return afterA === beforeB
     ? afterA
     : undefined;
-
-  // let min = 0;
-  // let max = sort.length - 1;
-  // let mid;
-
-  // while ((max - min) > 1) {
-  //   mid = Math.floor((min + max) / 2);
-  //   if ((sort[min] - min) !== (sort[mid] - mid)) {
-  //     max = mid;
-  //   } else if ((sort[max] - max) !== (sort[mid] - mid)) {
-  //     min = mid;
-  //   }
-
-  //   if (sort[max] - sort[min] === 2) {
-  //     mid = min;
-  //     break;
-  //   }
-  // }
-
-  // return sort[mid] + 1;
 }
 
 function halve(range: number[], direction: string): number[] {
