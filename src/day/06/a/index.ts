@@ -5,7 +5,7 @@ let groupYesCounts: number[] = [];
 answerSheet
   .split('\n\n')
   .map(a => a.replace(/\n/g, ''))
-  .map(set => {
+  .forEach(set => {
     groupYesCounts.push(new Set(set).size);
   });
 
