@@ -5,7 +5,8 @@
     "lib": ["es6", "dom", "es2017"],
     "removeComments": true,
     "preserveConstEnums": true,
-    "outDir": "build"
+    "outDir": "build",
+    "downlevelIteration": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
