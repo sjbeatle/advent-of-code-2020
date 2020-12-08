@@ -1,12 +1,10 @@
 import { bagRules } from './input';
 
 const myBag = 'shiny gold';
-const rules: Rule[] = [];
-
-bagRules
+const rules: Rule[] = bagRules
   .map(rule => {
     const parentChildren = rule.split(' bags contain ');
-    const parent = parentChildren[0];
+    const color = parentChildren[0];
     const children = parentChildren[1]
       .slice(0, -1)
       .split(', ')
@@ -19,10 +17,10 @@ bagRules
         };
       });
 
-    rules.push({
-      color: parent,
+    return {
+      color,
       children,
-    })
+    };
   });
 
 const validBags: Rule[] = rules.filter(rule => {
@@ -76,7 +74,7 @@ function getChildren(color: string, tracker: string[]) {
 /**
  * Interfaces
  */
-interface Rule {
+export interface Rule {
   color: string;
   children: Bag[];
 }
