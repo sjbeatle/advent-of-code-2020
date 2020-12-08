@@ -37,13 +37,11 @@ const instructions = bootCode.map(i => {
 /**
  * Fix corrupted instruction
  */
-let index: number;
 instructions.some((instruction, i) => {
   const original = instruction.com;
   instruction.com = swap(instruction);
   const endIndex = run(instructions, true);
   if (endIndex === 0) {
-    index = i;
     return true;
   }
   instruction.com = original;
