@@ -1,5 +1,12 @@
 import { bootCode } from './input';
 
+interface Instruction {
+  _: string;
+  com: Command;
+  sign: Sign;
+  num: number;
+}
+
 enum Command {
   'acc' = 'acc',
   'nop' = 'nop',
@@ -11,6 +18,9 @@ enum Sign {
   'add' = '+',
 }
 
+/**
+ * Parse instructions
+ */
 const instructions = bootCode.map(i => {
   const regex = /(.*) ([+-])(\d+)/;
   const [ _, com, sign, num] = regex.exec(i);
@@ -19,37 +29,50 @@ const instructions = bootCode.map(i => {
     com,
     sign,
     num: parseInt(num, 10),
-  };
+  } as Instruction;
 });
 
-const indices = [];
-let repeated = false;
-let i = 0;
-let accumulator = 0;
-while (!repeated) {
-  const instruction = instructions[i];
-  indices.push(i);
 
-  switch (instruction.com) {
-    case Command.acc:
-      accumulator = instruction.sign === Sign.add
-        ? accumulator + instruction.num
-        : accumulator - instruction.num;
-      i++;
-      break;
+/**
+ * Program
+ */
+function run(instructions: Instruction[]) {
+  const cursors = [];
+  let repeated = false;
+  let cursor = 0;
+  let accumulator = 0;
 
-    case Command.jmp:
-      i = instruction.sign === Sign.add
-        ? i + instruction.num
-        : i - instruction.num;
-      break;
+  while (!repeated) {
+    const instruction = instructions[cursor];
+    cursors.push(cursor);
 
-    case Command.nop:
-      i++;
-      break;
+    switch (instruction.com) {
+      case Command.acc:
+        accumulator = instruction.sign === Sign.add
+          ? accumulator + instruction.num
+          : accumulator - instruction.num;
+        cursor++;
+        break;
+
+      case Command.jmp:
+        cursor = instruction.sign === Sign.add
+          ? cursor + instruction.num
+          : cursor - instruction.num;
+        break;
+
+      case Command.nop:
+        cursor++;
+        break;
+    }
+
+    repeated = cursors.includes(cursor);
   }
 
-  repeated = indices.includes(i);
+  return accumulator;
 }
 
-console.log(`The accumulator value immediately before any instruction is executed a second time is ${accumulator}`);
+
+/**
+ * Answer
+ */
+console.log(`The accumulator value immediately before any instruction is executed a second time is ${run(instructions)}`);
