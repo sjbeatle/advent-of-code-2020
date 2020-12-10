@@ -5,7 +5,7 @@ sortedJoltages.unshift(0); // prepend the outlet
 sortedJoltages.push(sortedJoltages[sortedJoltages.length -1] + 3); // append the device
 
 let rating = 3;
-let joltDiffs: string = '';
+let joltDiffs = '';
 sortedJoltages.forEach((joltage, i) => {
   if (i === 0)
     return;
