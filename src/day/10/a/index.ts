@@ -1,8 +1,8 @@
-import { example, outputJoltages} from './input';
+import { outputJoltages} from './input';
 
 const sortedJoltages = outputJoltages.sort((a, b) => a - b);
-sortedJoltages.unshift(0);
-sortedJoltages.push(sortedJoltages[sortedJoltages.length -1] + 3);
+sortedJoltages.unshift(0); // prepend the outlet
+sortedJoltages.push(sortedJoltages[sortedJoltages.length -1] + 3); // append the device
 
 const joltDiffs: number[] = [];
 sortedJoltages.forEach((joltage, i) => {
