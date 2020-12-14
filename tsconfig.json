@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonJS",
     "noImplicitAny": true,
-    "lib": ["es6", "dom", "es2017"],
+    "lib": ["es6", "dom", "es2017", "esnext.bigint"],
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "build",
