@@ -7,23 +7,13 @@ initProgram.forEach(d => {
   const memory = getMemory(d);
 
   memory.forEach(b => {
-    // console.log('>> TESTING >> b.binary', b.binary);
     memoryBank[b.address] = getBitMask(mask, b.binary);
   });
 });
 
-// console.log('>> TESTING >> memoryBank', Object.values(memoryBank));
-const foo = Object.values(memoryBank).map(a => parseInt(a as string, 2));
-let b = 0;
-foo.forEach(a => {
-  b += a;
-  // console.log('>> TESTING >> a', a);
-  // console.log('>> TESTING >> b', b);
-});
-// @ts-ignore
-const sum = Object.values(memoryBank).reduce((a, b) => parseInt(a, 2) + parseInt(b, 2));
+const parseMemoryBankValues = Object.values(memoryBank).map(a => parseInt(a as string, 2));
 
-console.log('>> TESTING >> b', b);
+console.log('>> TESTING >> parseMemoryBankValues', parseMemoryBankValues.reduce((a, b) => a + b));
 
 function getBitMask(mask: string, b: string) {
   const bL = b.length;
